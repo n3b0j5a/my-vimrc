@@ -122,6 +122,7 @@ set tabstop=8                   " number of spaces that a <Tab> counts for
 set wildignore=*.bak,*.o,*.e,*~ " wildmenu: ignore these extensions
 set wildmenu                    " command-line completion in an enhanced mode
 set scrolljump=20               " jump when end of screen is reached
+set nocscopeverbose             " suppress cscope duplicate database warning
 
 "-------------------------------------------------------------------------------
 " Set quick escape from insert mode.
@@ -280,4 +281,3 @@ if has("cscope")
 
 	set ttimeoutlen=500
 endif
-
