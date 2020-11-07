@@ -224,9 +224,35 @@ set list lcs=tab:\┆\
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$\| \+\ze\t/
 
+"-------------------------------------------------------------------------------
+" Conque GDB settings 
+"-------------------------------------------------------------------------------
+
+let g:ConqueTerm_Color = 2
+let g:ConqueTerm_CloseOnEnd = 1
+let g:ConqueTerm_StartMessages = 0
+let g:ConqueGdb_GdbExe = '/usr/bin/arm-none-eabi-gdb'
+
+function DebugSession()
+	silent make -o vimgdb -gcflags "-N -l"
+	redraw!
+	if (filereadable("vimgdb"))
+		ConqueGdb vimgdb
+	else
+		echom "Couldn't find debug file"
+	endif
+endfunction
+function DebugSessionCleanup(term)
+	if (filereadable("vimgdb"))
+		let ds=delete("vimgdb")
+	endif
+endfunction
+call conque_term#register_function("after_close", "DebugSessionCleanup")
+nmap <leader>d :call DebugSession()<CR>;
+
 
 "-------------------------------------------------------------------------------
-" CScope settings. Used only for Linux kernel development
+" CScope settings
 "-------------------------------------------------------------------------------
 if has("cscope")
 	set csprg=/usr/bin/cscope
