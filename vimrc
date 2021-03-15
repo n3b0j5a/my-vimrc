@@ -29,7 +29,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_powerline_fonts = 1
 let g:airline_skip_empty_sections = 1
-let g:airline_theme='violet'
+let g:airline_theme='wombat'
 
 function! AirlineInit()
 	let g:airline_section_b = airline#section#create(['branch'])
@@ -84,6 +84,7 @@ set termguicolors
 hi Normal     ctermbg=NONE guibg=NONE
 hi LineNr     ctermbg=NONE guibg=NONE
 hi SignColumn ctermbg=NONE guibg=NONE
+hi ErrorMsg   ctermbg=darkred guibg=DarkRed
 
 "-------------------------------------------------------------------------------
 " Set cursor column and row highlight
@@ -218,11 +219,6 @@ let g:indentLine_color_term=100
 let g:indentLine_fileType = ['c','h','cpp', 'py']
 set list lcs=tab:\┆\ 
 
-"-------------------------------------------------------------------------------
-" Highlight trailing white spaces and tabs
-"-------------------------------------------------------------------------------
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$\| \+\ze\t/
 
 "-------------------------------------------------------------------------------
 " Conque GDB settings 
@@ -231,7 +227,7 @@ match ExtraWhitespace /\s\+$\| \+\ze\t/
 let g:ConqueTerm_Color = 2
 let g:ConqueTerm_CloseOnEnd = 1
 let g:ConqueTerm_StartMessages = 0
-let g:ConqueGdb_GdbExe = '/usr/bin/arm-none-eabi-gdb'
+"let g:ConqueGdb_GdbExe = '/usr/bin/arm-none-eabi-gdb'
 
 function DebugSession()
 	silent make -o vimgdb -gcflags "-N -l"
@@ -307,3 +303,4 @@ if has("cscope")
 
 	set ttimeoutlen=500
 endif
+
