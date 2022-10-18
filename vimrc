@@ -39,7 +39,6 @@ endfunction
 
 autocmd User AirlineAfterInit call AirlineInit()
 
-
 if !exists('g:airline_symbols')
 	let g:airline_symbols = {}
 endif
@@ -91,7 +90,6 @@ hi ErrorMsg   ctermbg=darkred guibg=DarkRed
 "-------------------------------------------------------------------------------
 set cursorcolumn
 set cursorline
-"highlight CursorLine guibg=darkgrey ctermbg=darkgrey
 
 "-------------------------------------------------------------------------------
 " Various settings
@@ -113,17 +111,41 @@ set number relativenumber       " enable line numbers
 set numberwidth=4               " line numbers width set to 4
 set popt=left:8pc,right:3pc     " print options
 set ruler                       " show the cursor position all the time
-set shiftwidth=8                " number of spaces to use for each step of indent
 set showcmd                     " display incomplete commands
 set showmatch                   " show matching braces
-set smartindent                 " smart autoindenting when starting a new line
 set spell                       " turn on spell check
-set tabstop=8                   " number of spaces that a <Tab> counts for
-"set visualbell                 " visual bell instead of beeping
+set smartindent                 " smart autoindenting when starting a new line
 set wildignore=*.bak,*.o,*.e,*~ " wildmenu: ignore these extensions
 set wildmenu                    " command-line completion in an enhanced mode
 set scrolljump=20               " jump when end of screen is reached
 set nocscopeverbose             " suppress cscope duplicate database warning
+set exrc                        " load any local .vimrc file found in working directory
+set noexpandtab
+set softtabstop=0
+set shiftwidth=8
+set tabstop=8
+
+"-------------------------------------------------------------------------------
+" Set indent to use spaces instead of tabs
+"-------------------------------------------------------------------------------
+function UseTabIndent()
+    set noexpandtab
+    set softtabstop=0
+    set shiftwidth=4
+    set tabstop=4
+endfunction
+
+"-------------------------------------------------------------------------------
+" Set indent to use tabs
+"-------------------------------------------------------------------------------
+function UseSpaceIndent()
+    set expandtab
+    set softtabstop=0
+    set shiftwidth=4
+    set tabstop=4
+endfunction
+
+autocmd BufREadPost ~/eclipse-esp32/* call UseSpaceIndent()
 
 "-------------------------------------------------------------------------------
 " Set quick escape from insert mode.
@@ -199,12 +221,12 @@ noremap <silent> <A-Right> :wincmd l<CR>
 " Set doxygen style comments for c-support plugin
 "-------------------------------------------------------------------------------
 call mmtemplates#config#Add ( 'C', '~/.vim/bundle/vim-plugins/c-support/templates/doxygen.template', 'Doxygen', 'ntd' )
-nnoremap <Leader>d :Dox<CR>
+noremap <Leader>d :Dox<CR>
 
 "-------------------------------------------------------------------------------
 " Leave the editor with Ctrl-q : Write all changed buffers and exit Vim
 "-------------------------------------------------------------------------------
-nnoremap  <C-q> :wqall<CR>
+noremap  <C-q> :wqall<CR>
 
 "-------------------------------------------------------------------------------
 " comma always followed by a space
@@ -221,7 +243,7 @@ set list lcs=tab:\┆\
 
 
 "-------------------------------------------------------------------------------
-" Conque GDB settings 
+" Conque GDB settings
 "-------------------------------------------------------------------------------
 
 let g:ConqueTerm_Color = 2
@@ -244,7 +266,7 @@ function DebugSessionCleanup(term)
 	endif
 endfunction
 call conque_term#register_function("after_close", "DebugSessionCleanup")
-nmap <leader>d :call DebugSession()<CR>;
+"nmap <leader>d :call DebugSession()<CR>;
 
 
 "-------------------------------------------------------------------------------
