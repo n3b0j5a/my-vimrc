@@ -120,10 +120,6 @@ set wildmenu                    " command-line completion in an enhanced mode
 set scrolljump=20               " jump when end of screen is reached
 set nocscopeverbose             " suppress cscope duplicate database warning
 set exrc                        " load any local .vimrc file found in working directory
-set noexpandtab
-set softtabstop=0
-set shiftwidth=8
-set tabstop=8
 
 "-------------------------------------------------------------------------------
 " Set indent to use spaces instead of tabs
@@ -135,6 +131,8 @@ function UseTabIndent()
     set tabstop=4
 endfunction
 
+" autocmd BufReadPost * call UseTabIndent()
+
 "-------------------------------------------------------------------------------
 " Set indent to use tabs
 "-------------------------------------------------------------------------------
@@ -145,7 +143,7 @@ function UseSpaceIndent()
     set tabstop=4
 endfunction
 
-autocmd BufREadPost ~/eclipse-esp32/* call UseSpaceIndent()
+autocmd BufReadPost * call UseSpaceIndent()
 
 "-------------------------------------------------------------------------------
 " Set quick escape from insert mode.
@@ -174,7 +172,7 @@ inoremap   <right> <Nop>
 inoremap   <up>    <Nop>
 
 "-------------------------------------------------------------------------------
-" Easier navigation throug buffers
+" Easier navigation through buffers
 "-------------------------------------------------------------------------------
 nnoremap <Leader>h :bd<CR>
 nnoremap <Leader>j :bp<CR>
@@ -325,4 +323,3 @@ if has("cscope")
 
 	set ttimeoutlen=500
 endif
-
