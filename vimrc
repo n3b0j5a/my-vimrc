@@ -120,30 +120,10 @@ set wildmenu                    " command-line completion in an enhanced mode
 set scrolljump=20               " jump when end of screen is reached
 set nocscopeverbose             " suppress cscope duplicate database warning
 set exrc                        " load any local .vimrc file found in working directory
-
-"-------------------------------------------------------------------------------
-" Set indent to use spaces instead of tabs
-"-------------------------------------------------------------------------------
-function UseTabIndent()
-    set noexpandtab
-    set softtabstop=0
-    set shiftwidth=4
-    set tabstop=4
-endfunction
-
-" autocmd BufReadPost * call UseTabIndent()
-
-"-------------------------------------------------------------------------------
-" Set indent to use tabs
-"-------------------------------------------------------------------------------
-function UseSpaceIndent()
-    set expandtab
-    set softtabstop=0
-    set shiftwidth=4
-    set tabstop=4
-endfunction
-
-autocmd BufReadPost * call UseSpaceIndent()
+set expandtab
+set softtabstop=0
+set shiftwidth=4
+set tabstop=4
 
 "-------------------------------------------------------------------------------
 " Set quick escape from insert mode.
